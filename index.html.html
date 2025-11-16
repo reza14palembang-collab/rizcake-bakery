@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Delights - Toko Kue Premium</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-pink: #FFB6C1;
+            --secondary-pink: #FFC0CB;
+            --cream: #FFF8F3;
+            --light-brown: #D4A574;
+            --dark-brown: #8B6F47;
+            --white: #FFFFFF;
+            --gray: #666666;
+            --light-gray: #F5F5F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-brown);
+            background-color: var(--cream);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-pink);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark-brown);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-pink);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h2 {
+            color: var(--dark-brown);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .login-error {
+            color: #ff4444;
+            font-size: 0.9rem;
+            text-align: center;
+            display: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            height: 600px;
+            background: linear-gradient(rgba(255, 182, 193, 0.3), rgba(255, 182, 193, 0.3)), 
+                        url('https://images.unsplash.com/photo-1486427944299-d1955d23e34d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary {
+            background: var(--primary-pink);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-pink);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark-brown);
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-brown);
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            color: var(--primary-pink);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* About Section */
+        .about-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .about-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--dark-brown);
+        }
+
+        .about-content p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-brown);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-pink);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary-pink);
+        }
+
+        /* Product Detail */
+        .product-detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .product-detail-image {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-detail-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-brown);
+        }
+
+        .product-detail-price {
+            font-size: 2rem;
+            color: var(--primary-pink);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-detail-description {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+        }
+
+        .admin-container {
+            background: var(--white);
+            width: 90%;
+            max-width: 800px;
+            margin: 2rem auto;
+            border-radius: 20px;
+            padding: 2rem;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .admin-tab {
+            padding: 0.5rem 1rem;
+            background: var(--light-gray);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .admin-tab.active {
+            background: var(--primary-pink);
+            color: var(--white);
+        }
+
+        .admin-content {
+            display: none;
+        }
+
+        .admin-content.active {
+            display: block;
+        }
+
+        .admin-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .admin-product-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .admin-product-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 10px;
+        }
+
+        .close-admin {
+            background: var(--primary-pink);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-brown);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .about-section,
+            .product-detail,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-detail {
+                padding: 2rem;
+            }
+
+            .product-detail-info h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Hidden pages */
+        .page {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Admin button visibility */
+        .admin-only {
+            display: none;
+        }
+
+        .admin-only.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-container">
+            <div class="login-header">
+                <h2>🔐 Admin Login</h2>
+                <p>Masuk untuk mengelola website</p>
+            </div>
+            <form class="login-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required placeholder="Masukkan username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Masukkan password">
+                </div>
+                <div class="login-error" id="loginError">Username atau password salah!</div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Login</button>
+                <button type="button" class="btn-primary" onclick="closeLoginModal()" 
+                        style="width: 100%; background: var(--gray); margin-top: 10px;">Batal</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showPage('home')">🧁 Sweet Delights</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#" onclick="showPage('home')">Beranda</a></li>
+                <li><a href="#" onclick="showPage('products')">Produk</a></li>
+                <li><a href="#" onclick="showPage('about')">Tentang Kami</a></li>
+                <li><a href="#" onclick="showPage('contact')">Kontak</a></li>
+                <li><a href="#" onclick="showLoginModal()" class="admin-only">Admin</a></li>
+                <li><a href="#" onclick="logout()" class="admin-only show" id="logoutBtn" style="display: none;">Logout</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 id="heroTitle">Sweet Delights</h1>
+                <p id="heroSubtitle">Kue Premium Homemade untuk Momen Spesial Anda</p>
+                <a href="#" onclick="showPage('products')" class="btn-primary">Lihat Produk Kami</a>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Produk Unggulan</h2>
+                <div class="product-grid" id="featuredProducts">
+                    <!-- Products will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section">
+            <div class="container">
+                <div class="about-section">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                         alt="Tentang Kami" class="about-image" id="aboutImage">
+                    <div class="about-content">
+                        <h2 id="aboutTitle">Tentang Sweet Delights</h2>
+                        <p id="aboutText">
+                            Sweet Delights adalah toko kue premium yang menyajikan berbagai macam kue homemade 
+                            dengan bahan berkualitas terbaik. Kami berkomitmen untuk memberikan kelezatan 
+                            dan kebahagiaan dalam setiap gigitan. Setiap kue dibuat dengan penuh cinta 
+                            dan perhatian terhadap detail untuk momen spesial Anda.
+                        </p>
+                        <p>
+                            Didirikan sejak 2020, kami telah melayani ribuan pelanggan yang puas 
+                            dengan kualitas dan rasa kue kami. Kami juga menerima pesanan kue custom 
+                            untuk ulang tahun, pernikahan, dan acara spesial lainnya.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Products Page -->
+    <div id="products" class="page">
+        <section class="section" style="margin-top: 80px;">
+            <div class="container">
+                <h1 class="section-title">Semua Produk Kami</h1>
+                <div class="product-grid" id="allProducts">
+                    <!-- Products will be loaded here -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Product Detail Page -->
+    <div id="productDetail" class="page">
+        <section class="section" style="margin-top: 80px;">
+            <div class="container">
+                <div class="product-detail" id="productDetailContent">
+                    <!-- Product detail will be loaded here -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page">
+        <section class="section" style="margin-top: 80px;">
+            <div class="container">
+                <div class="about-section">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                         alt="Tentang Kami" class="about-image" id="aboutImagePage">
+                    <div class="about-content">
+                        <h2 id="aboutTitlePage">Tentang Sweet Delights</h2>
+                        <p id="aboutTextPage">
+                            Sweet Delights adalah toko kue premium yang menyajikan berbagai macam kue homemade 
+                            dengan bahan berkualitas terbaik. Kami berkomitmen untuk memberikan kelezatan 
+                            dan kebahagiaan dalam setiap gigitan. Setiap kue dibuat dengan penuh cinta 
+                            dan perhatian terhadap detail untuk momen spesial Anda.
+                        </p>
+                        <p>
+                            Didirikan sejak 2020, kami telah melayani ribuan pelanggan yang puas 
+                            dengan kualitas dan rasa kue kami. Kami juga menerima pesanan kue custom 
+                            untuk ulang tahun, pernikahan, dan acara spesial lainnya.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <section class="section" style="margin-top: 80px;">
+            <div class="container">
+                <h1 class="section-title">Hubungi Kami</h1>
+                <div class="contact-section">
+                    <div class="contact-grid">
+                        <form class="contact-form" onsubmit="handleContactForm(event)">
+                            <div class="form-group">
+                                <label for="name">Nama Lengkap</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Nomor Telepon</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Pesan</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">Kirim Pesan</button>
+                        </form>
+                        <div class="contact-info">
+                            <h3>Informasi Kontak</h3>
+                            <div class="contact-item">
+                                <i class="fab fa-whatsapp"></i>
+                                <div>
+                                    <p><strong>WhatsApp</strong></p>
+                                    <p id="whatsappNumber">0812-3456-7890</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <p><strong>Alamat Toko</strong></p>
+                                    <p id="storeAddress">Jl. Kue Manis No. 123, Jakarta Selatan</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <p><strong>Jam Operasional</strong></p>
+                                    <p>Senin - Minggu: 08.00 - 20.00 WIB</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <p><strong>Email</strong></p>
+                                    <p id="storeEmail">hello@sweetdelights.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h2>🛠️ Admin Panel - Sweet Delights</h2>
+                <button class="close-admin" onclick="closeAdminPanel()">Tutup</button>
+            </div>
+            
+            <div class="admin-tabs">
+                <button class="admin-tab active" onclick="showAdminTab('products')">Produk</button>
+                <button class="admin-tab" onclick="showAdminTab('content')">Konten</button>
+                <button class="admin-tab" onclick="showAdminTab('contact')">Kontak</button>
+            </div>
+
+            <!-- Products Tab -->
+            <div id="adminProducts" class="admin-content active">
+                <h3>Kelola Produk</h3>
+                <button class="btn-primary" onclick="showAddProductForm()">Tambah Produk Baru</button>
+                
+                <div id="addProductForm" style="display: none; margin-top: 1rem;">
+                    <form class="admin-form" onsubmit="addProduct(event)">
+                        <div class="form-group">
+                            <label>Nama Produk</label>
+                            <input type="text" id="newProductName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Harga</label>
+                            <input type="number" id="newProductPrice" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Deskripsi Singkat</label>
+                            <input type="text" id="newProductShortDesc" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Deskripsi Panjang</label>
+                            <textarea id="newProductLongDesc" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>URL Gambar</label>
+                            <input type="url" id="newProductImage" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Produk Unggulan?</label>
+                            <select id="newProductFeatured">
+                                <option value="true">Ya</option>
+                                <option value="false">Tidak</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-primary">Simpan Produk</button>
+                        <button type="button" class="btn-primary" onclick="hideAddProductForm()" style="background: var(--gray); margin-left: 1rem;">Batal</button>
+                    </form>
+                </div>
+                
+                <div class="admin-product-list" id="adminProductList">
+                    <!-- Product list will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Content Tab -->
+            <div id="adminContent" class="admin-content">
+                <h3>Kelola Konten</h3>
+                <form class="admin-form" onsubmit="updateContent(event)">
+                    <div class="form-group">
+                        <label>Judul Hero Section</label>
+                        <input type="text" id="adminHeroTitle" value="Sweet Delights">
+                    </div>
+                    <div class="form-group">
+                        <label>Subjudul Hero Section</label>
+                        <input type="text" id="adminHeroSubtitle" value="Kue Premium Homemade untuk Momen Spesial Anda">
+                    </div>
+                    <div class="form-group">
+                        <label>Judul Tentang Kami</label>
+                        <input type="text" id="adminAboutTitle" value="Tentang Sweet Delights">
+                    </div>
+                    <div class="form-group">
+                        <label>Teks Tentang Kami</label>
+                        <textarea id="adminAboutText" rows="6">Sweet Delights adalah toko kue premium yang menyajikan berbagai macam kue homemade dengan bahan berkualitas terbaik. Kami berkomitmen untuk memberikan kelezatan dan kebahagiaan dalam setiap gigitan.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>URL Gambar Banner</label>
+                        <input type="url" id="adminHeroImage" value="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80">
+                    </div>
+                    <div class="form-group">
+                        <label>URL Gambar Tentang Kami</label>
+                        <input type="url" id="adminAboutImage" value="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80">
+                    </div>
+                    <button type="submit" class="btn-primary">Simpan Perubahan</button>
+                </form>
+            </div>
+
+            <!-- Contact Tab -->
+            <div id="adminContact" class="admin-content">
+                <h3>Kelola Kontak</h3>
+                <form class="admin-form" onsubmit="updateContact(event)">
+                    <div class="form-group">
+                        <label>Nomor WhatsApp</label>
+                        <input type="text" id="adminWhatsapp" value="0812-3456-7890">
+                    </div>
+                    <div class="form-group">
+                        <label>Alamat Toko</label>
+                        <input type="text" id="adminAddress" value="Jl. Kue Manis No. 123, Jakarta Selatan">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Toko</label>
+                        <input type="email" id="adminEmail" value="hello@sweetdelights.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Instagram</label>
+                        <input type="text" id="adminInstagram" value="@sweetdelights">
+                    </div>
+                    <button type="submit" class="btn-primary">Simpan Kontak</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Sweet Delights. All rights reserved. | Dibuat dengan ❤️ untuk pecinta kue</p>
+            <p>Follow us: <span id="instagramHandle">@sweetdelights</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // Admin credentials
+        const ADMIN_USERNAME = "RizcakeB";
+        const ADMIN_PASSWORD = "R.102010";
+
+        // Login state
+        let isAdminLoggedIn = false;
+
+        // Sample product data
+        let products = [
+            {
+                id: 1,
+                name: "Red Velvet Cake",
+                price: 250000,
+                shortDescription: "Kue red velvet lembut dengan cream cheese frosting",
+                longDescription: "Red Velvet Cake premium kami dibuat dengan bahan berkualitas tinggi. Lapisan cake merah yang lembut dipadukan dengan cream cheese frosting yang creamy. Ukuran 20cm, cocok untuk 8-10 orang. Perfect untuk ulang tahun atau perayaan spesial Anda.",
+                image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                featured: true
+            },
+            {
+                id: 2,
+                name: "Chocolate Lava Cake",
+                price: 35000,
+                shortDescription: "Kue coklat leleh di tengah, hangat dan nikmat",
+                longDescription: "Chocolate Lava Cake individual dengan coklat premium yang meleleh di tengah. Dihidangkan hangat dengan es krim vanila. Ukuran personal, perfect untuk pencinta coklat sejati. Dibuat dengan dark chocolate berkualitas.",
+                image: "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                featured: true
+            },
+            {
+                id: 3,
+                name: "Rainbow Cake",
+                price: 300000,
+                shortDescription: "Kue pelangi 7 lapisan dengan buttercream frosting",
+                longDescription: "Rainbow Cake yang ceria dengan 7 lapisan warna-warni. Dihiasi dengan buttercream frosting yang manis dan colorful. Ukuran 20cm, cocok untuk ulang tahun anak-anak atau mereka yang muda di hati. Membawa keceriaan dalam setiap potongan.",
+                image: "https://images.unsplash.com/photo-1535141192574-5d4897c12636?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                featured: true
+            },
+            {
+                id: 4,
+                name: "Tiramisu Cup",
+                price: 45000,
+                shortDescription: "Tiramisu klasik dalam cup, creamy dan coffee-licious",
+                longDescription: "Tiramisu autentik dengan ladyfinger yang direndam espresso, lapisan mascarpone creamy, dan taburan cocoa powder. Ukuran cup individual, perfect untuk dessert atau hadiah kecil. Dibuat dengan coffee premium.",
+                image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                featured: false
+            },
+            {
+                id: 5,
+                name: "Cheesecake Strawberry",
+                price: 180000,
+                shortDescription: "Cheesecake lembut topping strawberry segar",
+                longDescription: "New York Cheesecake yang creamy dengan topping strawberry segar dan glaze manis. Base yang crispy dari graham cracker. Ukuran 18cm, cocok untuk 6-8 orang. Salah satu best seller kami yang timeless.",
+                image: "https://images.unsplash.com/photo-1567327613485-fbc7bf196198?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                featured: false
+            }
+        ];
+
+        // Content data
+        let contentData = {
+            heroTitle: "Sweet Delights",
+            heroSubtitle: "Kue Premium Homemade untuk Momen Spesial Anda",
+            aboutTitle: "Tentang Sweet Delights",
+            aboutText: "Sweet Delights adalah toko kue premium yang menyajikan berbagai macam kue homemade dengan bahan berkualitas terbaik. Kami berkomitmen untuk memberikan kelezatan dan kebahagiaan dalam setiap gigitan.",
+            heroImage: "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+            aboutImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+        };
+
+        // Contact data
+        let contactData = {
+            whatsapp: "0812-3456-7890",
+            address: "Jl. Kue Manis No. 123, Jakarta Selatan",
+            email: "hello@sweetdelights.com",
+            instagram: "@sweetdelights"
+        };
+
+        // Initialize the website
+        function init() {
+            loadFeaturedProducts();
+            loadAllProducts();
+            updateContentDisplay();
+            updateContactDisplay();
+            updateAdminUI();
+        }
+
+        // Login functions
+        function showLoginModal() {
+            document.getElementById('loginModal').style.display = 'flex';
+            document.getElementById('loginError').style.display = 'none';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                isAdminLoggedIn = true;
+                closeLoginModal();
+                showAdminPanel();
+                updateAdminUI();
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+
+        function logout() {
+            isAdminLoggedIn = false;
+            closeAdminPanel();
+            updateAdminUI();
+            showPage('home');
+        }
+
+        function updateAdminUI() {
+            const adminButton = document.querySelector('.admin-only');
+            const logoutButton = document.getElementById('logoutBtn');
+            
+            if (isAdminLoggedIn) {
+                adminButton.style.display = 'none';
+                logoutButton.style.display = 'block';
+            } else {
+                adminButton.style.display = 'block';
+                logoutButton.style.display = 'none';
+            }
+        }
+
+        // Show/hide pages
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            
+            // Close mobile menu if open
+            document.getElementById('navMenu').classList.remove('active');
+        }
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+
+        // Load featured products
+        function loadFeaturedProducts() {
+            const featuredContainer = document.getElementById('featuredProducts');
+            const featuredProducts = products.filter(p => p.featured);
+            
+            featuredContainer.innerHTML = featuredProducts.map(product => `
+                <div class="product-card" onclick="showProductDetail(${product.id})">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-price">Rp ${product.price.toLocaleString()}</p>
+                        <p class="product-description">${product.shortDescription}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load all products
+        function loadAllProducts() {
+            const allProductsContainer = document.getElementById('allProducts');
+            
+            allProductsContainer.innerHTML = products.map(product => `
+                <div class="product-card" onclick="showProductDetail(${product.id})">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-price">Rp ${product.price.toLocaleString()}</p>
+                        <p class="product-description">${product.shortDescription}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Show product detail
+        function showProductDetail(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const detailContainer = document.getElementById('productDetailContent');
+            detailContainer.innerHTML = `
+                <img src="${product.image}" alt="${product.name}" class="product-detail-image">
+                <div class="product-detail-info">
+                    <h1>${product.name}</h1>
+                    <p class="product-detail-price">Rp ${product.price.toLocaleString()}</p>
+                    <p class="product-detail-description">${product.longDescription}</p>
+                    <a href="https://wa.me/${contactData.whatsapp.replace(/[^0-9]/g, '')}?text=Halo%20Sweet%20Delights,%20saya%20ingin%20pesan%20${encodeURIComponent(product.name)}" 
+                       class="whatsapp-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Pesan via WhatsApp
+                    </a>
+                </div>
+            `;
+            
+            showPage('productDetail');
+        }
+
+        // Update content display
+        function updateContentDisplay() {
+            document.getElementById('heroTitle').textContent = contentData.heroTitle;
+            document.getElementById('heroSubtitle').textContent = contentData.heroSubtitle;
+            document.getElementById('aboutTitle').textContent = contentData.aboutTitle;
+            document.getElementById('aboutText').textContent = contentData.aboutText;
+            document.getElementById('aboutTitlePage').textContent = contentData.aboutTitle;
+            document.getElementById('aboutTextPage').textContent = contentData.aboutText;
+            document.getElementById('aboutImage').src = contentData.aboutImage;
+            document.getElementById('aboutImagePage').src = contentData.aboutImage;
+            document.querySelector('.hero').style.backgroundImage = 
+                `linear-gradient(rgba(255, 182, 193, 0.3), rgba(255, 182, 193, 0.3)), url(${contentData.heroImage})`;
+        }
+
+        // Update contact display
+        function updateContactDisplay() {
+            document.getElementById('whatsappNumber').textContent = contactData.whatsapp;
+            document.getElementById('storeAddress').textContent = contactData.address;
+            document.getElementById('storeEmail').textContent = contactData.email;
+            document.getElementById('instagramHandle').textContent = contactData.instagram;
+        }
+
+        // Handle contact form
+        function handleContactForm(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            const message = formData.get('message');
+            
+            const whatsappUrl = `https://wa.me/${contactData.whatsapp.replace(/[^0-9]/g, '')}?text=Halo%20Sweet%20Delights,%20saya%20${encodeURIComponent(name)}.%20${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Admin panel functions
+        function showAdminPanel() {
+            if (!isAdminLoggedIn) {
+                showLoginModal();
+                return;
+            }
+            document.getElementById('adminPanel').style.display = 'block';
+            loadAdminProductList();
+            loadAdminContent();
+            loadAdminContact();
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('adminPanel').style.display = 'none';
+        }
+
+        function showAdminTab(tabName) {
+            const tabs = document.querySelectorAll('.admin-tab');
+            const contents = document.querySelectorAll('.admin-content');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(`admin${tabName.charAt(0).toUpperCase() + tabName.slice(1)}`).classList.add('active');
+        }
+
+        function loadAdminProductList() {
+            const productList = document.getElementById('adminProductList');
+            productList.innerHTML = products.map(product => `
+                <div class="admin-product-item">
+                    <div>
+                        <strong>${product.name}</strong> - Rp ${product.price.toLocaleString()}
+                        ${product.featured ? '<span style="color: var(--primary-pink); margin-left: 10px;">⭐ Unggulan</span>' : ''}
+                    </div>
+                    <div>
+                        <button onclick="editProduct(${product.id})" style="margin-right: 10px;">Edit</button>
+                        <button onclick="deleteProduct(${product.id})" style="background: #ff4444;">Hapus</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadAdminContent() {
+            document.getElementById('adminHeroTitle').value = contentData.heroTitle;
+            document.getElementById('adminHeroSubtitle').value = contentData.heroSubtitle;
+            document.getElementById('adminAboutTitle').value = contentData.aboutTitle;
+            document.getElementById('adminAboutText').value = contentData.aboutText;
+            document.getElementById('adminHeroImage').value = contentData.heroImage;
+            document.getElementById('adminAboutImage').value = contentData.aboutImage;
+        }
+
+        function loadAdminContact() {
+            document.getElementById('adminWhatsapp').value = contactData.whatsapp;
+            document.getElementById('adminAddress').value = contactData.address;
+            document.getElementById('adminEmail').value = contactData.email;
+            document.getElementById('adminInstagram').value = contactData.instagram;
+        }
+
+        function showAddProductForm() {
+            document.getElementById('addProductForm').style.display = 'block';
+        }
+
+        function hideAddProductForm() {
+            document.getElementById('addProductForm').style.display = 'none';
+        }
+
+        function addProduct(event) {
+            event.preventDefault();
+            
+            const newProduct = {
+                id: Date.now(),
+                name: document.getElementById('newProductName').value,
+                price: parseInt(document.getElementById('newProductPrice').value),
+                shortDescription: document.getElementById('newProductShortDesc').value,
+                longDescription: document.getElementById('newProductLongDesc').value,
+                image: document.getElementById('newProductImage').value,
+                featured: document.getElementById('newProductFeatured').value === 'true'
+            };
+            
+            products.push(newProduct);
+            loadFeaturedProducts();
+            loadAllProducts();
+            loadAdminProductList();
+            hideAddProductForm();
+            event.target.reset();
+            alert('Produk berhasil ditambahkan!');
+        }
+
+        function editProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const newName = prompt('Nama Produk:', product.name);
+            if (!newName) return;
+            
+            const newPrice = prompt('Harga:', product.price);
+            if (!newPrice) return;
+            
+            const newShortDesc = prompt('Deskripsi Singkat:', product.shortDescription);
+            if (!newShortDesc) return;
+            
+            const newLongDesc = prompt('Deskripsi Panjang:', product.longDescription);
+            if (!newLongDesc) return;
+            
+            const newImage = prompt('URL Gambar:', product.image);
+            if (!newImage) return;
+            
+            const newFeatured = confirm('Jadikan produk unggulan?');
+            
+            product.name = newName;
+            product.price = parseInt(newPrice);
+            product.shortDescription = newShortDesc;
+            product.longDescription = newLongDesc;
+            product.image = newImage;
+            product.featured = newFeatured;
+            
+            loadFeaturedProducts();
+            loadAllProducts();
+            loadAdminProductList();
+            alert('Produk berhasil diupdate!');
+        }
+
+        function deleteProduct(productId) {
+            if (!confirm('Apakah Anda yakin ingin menghapus produk ini?')) return;
+            
+            products = products.filter(p => p.id !== productId);
+            loadFeaturedProducts();
+            loadAllProducts();
+            loadAdminProductList();
+            alert('Produk berhasil dihapus!');
+        }
+
+        function updateContent(event) {
+            event.preventDefault();
+            
+            contentData.heroTitle = document.getElementById('adminHeroTitle').value;
+            contentData.heroSubtitle = document.getElementById('adminHeroSubtitle').value;
+            contentData.aboutTitle = document.getElementById('adminAboutTitle').value;
+            contentData.aboutText = document.getElementById('adminAboutText').value;
+            contentData.heroImage = document.getElementById('adminHeroImage').value;
+            contentData.aboutImage = document.getElementById('adminAboutImage').value;
+            
+            updateContentDisplay();
+            alert('Konten berhasil diupdate!');
+        }
+
+        function updateContact(event) {
+            event.preventDefault();
+            
+            contactData.whatsapp = document.getElementById('adminWhatsapp').value;
+            contactData.address = document.getElementById('adminAddress').value;
+            contactData.email = document.getElementById('adminEmail').value;
+            contactData.instagram = document.getElementById('adminInstagram').value;
+            
+            updateContactDisplay();
+            alert('Kontak berhasil diupdate!');
+        }
+
+        // Initialize the website when page loads
+        window.onload = init;
+    </script>
+</body>
+</html>
